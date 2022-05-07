@@ -37,13 +37,36 @@ body{
     font-weight: bold;
     font-size: 20px;
 }
-.banner{
-    height: 560px;
-    color: white;
-    background-image:url("https://jconlineimagem.ne10.uol.com.br/imagem/noticia/2019/11/19/normal/13da64c7055989861269b395c9c810d0.jpg");
+.banner {
+    position: relative;
+    background-color: white;
+    overflow: hidden;
+}
+.banner #blob {
+    padding: 50px;
+    position: relative;
+    z-index: 2;
+}
+.banner:before {
+    content: ' ';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0.6;
+    background-image: url('https://jconlineimagem.ne10.uol.com.br/imagem/noticia/2019/11/19/normal/13da64c7055989861269b395c9c810d0.jpg');
+    background-repeat: no-repeat;
+    background-position: 50% 0;
     background-size: cover;
-    width:100%;
-    opacity: 0.50;
+}
+
+.banner img{
+    margin-top: 50px;
+    margin-left: 60px;
+    width: 600px;
 }
 .albuns{
     display: flex;
