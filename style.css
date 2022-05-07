@@ -2,7 +2,8 @@
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 body{
-    background-color: #c6c5c5;
+    margin: 0;
+    background-color: #e2e2e2;
 }
 .container{
     width: 90%;
@@ -10,8 +11,9 @@ body{
 .header{
     display: flex;
     justify-content: center;
-    height: 65px;
+    height: 80px;
     border-bottom: 4px solid #2d2d2d;
+    background-color: #919191;
 }
 .header .container{
     display: flex;
@@ -35,16 +37,36 @@ body{
     font-weight: bold;
     font-size: 20px;
 }
-.banner img{
+.banner{
+    height: 560px;
+    color: white;
+    background-image:url("https://jconlineimagem.ne10.uol.com.br/imagem/noticia/2019/11/19/normal/13da64c7055989861269b395c9c810d0.jpg");
+    background-size: cover;
+    width:100%;
+    opacity: 0.50;
+}
+.albuns{
+    display: flex;
+    justify-content: space-evenly;
+}
+.boxmusica img{
     width: 250px;
 }
 .boxmusica{
-    margin-top: 100px;
+    margin-top: 80px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
+.boxmusica audio{
+    width: 260px;
+    margin-top: 30px;
+}
+.boxmusica p{
+    font-weight: bold;
+}
+
 .content img{
     margin-top: 150px;
     margin-left: 60px;
