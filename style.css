@@ -13,7 +13,7 @@ body{
     justify-content: center;
     height: 80px;
     border-bottom: 4px solid #2d2d2d;
-    background-color: #919191;
+    background-color: #dbd9d9;
 }
 .header .container{
     display: flex;
@@ -60,7 +60,7 @@ body{
     height: 100%;
     z-index: 1;
     opacity: 0.6;
-    background-image: url('https://jconlineimagem.ne10.uol.com.br/imagem/noticia/2019/11/19/normal/13da64c7055989861269b395c9c810d0.jpg');
+    background-image: url('img\ site/Show.jpg');
     background-repeat: no-repeat;
     background-position: 50% 0;
     background-size: cover;
