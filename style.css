@@ -46,6 +46,9 @@ body{
     padding: 50px;
     position: relative;
     z-index: 2;
+    margin-top: 15px;
+    margin-left: 60px;
+    width: 600px;
 }
 .banner:before {
     content: ' ';
@@ -63,11 +66,6 @@ body{
     background-size: cover;
 }
 
-.banner img{
-    margin-top: 50px;
-    margin-left: 60px;
-    width: 600px;
-}
 .albuns{
     display: flex;
     justify-content: space-evenly;
@@ -90,10 +88,59 @@ body{
     font-weight: bold;
 }
 
-.content img{
-    margin-top: 150px;
+.integrantes img{
+    margin-right: 60px;
     margin-left: 60px;
     width: 400px;
     height: 400px;
     border-radius: 200px;
+    margin-top: 90px;
+}
+.integrante{
+    display: flex;
+    justify-content:flex-end;
+    align-items: center;
+    padding-bottom: 80px;
+    border-bottom: #2d2d2d solid 1px;
+}
+.integrantes{
+    display: flex;
+    flex-direction: column;
+}
+.desc{
+    margin-top: 60px;
+    background-color: black;
+    height: 300px;
+    width: 650px;
+    display: flex;
+    align-items: center;
+    padding: 30px;
+
+}
+.desc p{
+    color: white;
+    font-weight: bold;
+}
+.esquerda{
+    border-top-left-radius: 360px;
+    border-bottom-left-radius: 360px;
+}
+.direita{
+    border-top-right-radius: 360px;
+    border-bottom-right-radius: 360px;
+}
+.invertido{
+    display: flex;
+    flex-direction: row-reverse;
+}
+.integrantes h2{
+    align-self: center;
+    margin-top: 60px;
+    font-size: 40px;
+}
+.titulo{
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+    font-size: 25px;
 }
