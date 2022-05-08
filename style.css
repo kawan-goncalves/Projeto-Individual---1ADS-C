@@ -5,6 +5,7 @@ body{
     margin: 0;
     background-color: #e2e2e2;
 }
+
 .container{
     width: 90%;
 }
@@ -72,6 +73,8 @@ body{
 }
 .boxmusica img{
     width: 250px;
+    height: 250px;
+    cursor: pointer;
 }
 .boxmusica{
     margin-top: 80px;
@@ -79,15 +82,18 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
+    margin-left: 10px;
 }
 .boxmusica audio{
     width: 260px;
-    margin-top: 30px;
+    margin-top: 10px;
 }
 .boxmusica p{
     font-weight: bold;
+    margin-bottom: 30px;
+    
 }
-
 .integrantes img{
     margin-right: 60px;
     margin-left: 60px;
@@ -143,4 +149,35 @@ body{
     justify-content: center;
     margin-top: 60px;
     font-size: 25px;
+}
+
+
+.mainmenubtn {
+    background-color: skyblue;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding:20px;
+    margin-top:20px;
+}
+.mainmenubtn:hover {
+    background-color: blue;
+    }
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+.dropdown-child {
+    display: none;
+    background-color: skyblue;
+    min-width: 200px;
+}
+.dropdown-child a {
+    color: blue;
+    padding: 20px;
+    text-decoration: none;
+    display: block;
+}
+.dropdown:hover .dropdown-child {
+    display: block;
 }
