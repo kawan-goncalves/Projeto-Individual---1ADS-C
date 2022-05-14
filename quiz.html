@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz | Maroon 5</title>
+    <link rel="stylesheet" href="stylequiz.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="scriptquiz.js"></script>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <a href="index.html"><img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Maroon_5_%28Logo%29.png"></a>
+            <ul class="navbar">
+                <div class="menu-drop">
+                    <img src="img site/icon menu.png" name="drop" id="drop">
+                    <div class="drop-content">
+                    <a href="index.html">Home</a>
+                      <a href="inicioquiz.html">Quiz</a>
+                      <a href="#">Login</a>
+                      <a href="#abrirModal">Cadastro</a>
+                    </div>
+                    </div>
+            </ul>
+            
+        </div>
+        </div>
+    <div class="containerquiz">
+        <div class="cardQuiz" id="card">
+          <a href="inicioquiz.html"><div class="fundoicon"><img src="https://cdn-icons-png.flaticon.com/512/786/786197.png" alt="voltar" id="voltar"></div></a>
+          <h1 id="numeroquestao">Pergunta 1</h1>
+            <div class="questao">
+                <h3 id="questao"><p>Quantos integrantes são ?</p></h3>
+            </div>
+            <div class="alternativa">
+                <div class="ab" id="ab" >
+                    <div class="abcd"><button onclick="alternativaA()"><span id="respostaA">5</span></button></div>
+                    <div class="abcd"><button onclick="alternativaC()"><span id="respostaC">7</span></button></div>
+                </div>
+                <div class="cd" id="cd" >
+                    <div class="abcd"><button onclick="alternativaB()"><span id="respostaB">4</span></button></div>
+                    <div class="abcd"><button onclick="alternativaD()"><span id="respostaD">6</span></button></div>
+                </div>
+            </div>
+            <div id="tempo">
+                <div id="tempopassando"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

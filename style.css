@@ -105,7 +105,7 @@ body {
 
 .integrante {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
     padding-bottom: 80px;
     border-bottom: #2d2d2d solid 1px;
@@ -124,6 +124,7 @@ body {
     display: flex;
     align-items: center;
     padding: 30px;
+    overflow: hidden;
 
 }
 
@@ -193,4 +194,48 @@ body {
   }
   .menu-drop:hover .drop-content{
     display: block;
+  }
+
+  .modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 3;
+    opacity:0;
+    transition: opacity 400ms ease-in;
+    pointer-events: none;
+  }
+  .modal:target {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .fechar {
+    position: absolute;
+    width: 30px;
+    right: -15px;
+    top: -20px;
+    text-align: center;
+    line-height: 30px;
+    margin-top: 5px;
+    background: #ff4545;
+    border-radius: 50%;
+    font-size: 16px;
+    color: #8d0000;
+  }
+  .modalCadastro{
+      background-color: #dbd9d9;
+      display: flex;
+      justify-content: center;
+      align-self: center;
+      justify-self: center;
+      align-items: center;
+      flex-direction: column;
+      height:300px;
+      width: 400px;
+      border-radius: 20px;
+      position: relative;
+      margin: 10% auto;
   }

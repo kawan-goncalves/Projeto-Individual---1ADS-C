@@ -4,22 +4,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Home | Maroon 5</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
 </head>
 <body>
     <div class="header">
     <div class="container">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Maroon_5_%28Logo%29.png">
+        <a href="index.html"><img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Maroon_5_%28Logo%29.png"></a>
         <ul class="navbar">
             <div class="menu-drop">
                 <img src="img site/icon menu.png" name="drop" id="drop">
                 <div class="drop-content">
-                <a href="#">Home</a>
-                  <a href="#">Quiz</a>
+                <a href="index.html">Home</a>
+                  <a href="inicioquiz.html">Quiz</a>
                   <a href="#">Login</a>
-                  <a href="#">Cadastro</a>
+                  <a href="#abrirModal">Cadastro</a>
                 </div>
                 </div>
         </ul>
@@ -52,6 +52,32 @@
             <audio src="musicas/Maroon 5 - One More Night.mp3" loop="true" id="playaudionight">
                 O seu navegador não tem suporte à áudio.
             </audio> 
+        </div>
+        <div id="abrirModal" class="modal">
+            <div class="modalCadastro">
+              <a href="#fechar" title="Fechar" class="fechar">X</a>
+    
+              <p>Cadastre-se</p>
+              <form >
+                  <label for="email">Email:</label>
+                  <input type="text" id="email"><br>
+                  <label for="senha">Senha:</label>
+                  <input type="password" id="senha">
+              </form>
+            </div>
+        </div>
+        <div id="abrirModal" class="modal">
+            <div class="modalCadastro">
+              <a href="#fechar" title="Fechar" class="fechar">X</a>
+    
+              <p>Cadastre-se</p>
+              <form >
+                  <label for="email">Email:</label>
+                  <input type="text" id="email"><br>
+                  <label for="senha">Senha:</label>
+                  <input type="password" id="senha">
+              </form>
+            </div>
         </div>
         <div class="boxmusica">
             <p>Ouça "Memories" do Album Jordi !!!</p>
