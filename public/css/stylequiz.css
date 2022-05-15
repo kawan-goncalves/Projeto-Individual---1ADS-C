@@ -125,4 +125,14 @@ input[type="radio"]{
  font-weight: bold;
  cursor: pointer;
 }
-
+#charts{
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+}
+#barchart{
+    display: none;
+}
+#linechart{
+    display: none;
+}

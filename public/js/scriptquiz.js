@@ -1,10 +1,10 @@
 var largura = 300
 var contador = 0
-var acertos = 0
+var qtacertos = 0
 var quiz = setInterval(function diminuir() {
     tempopassando.style.width = largura + "px"
     largura -= 0.0440412
-    if(contador<1){
+    if (contador < 1) {
         contador++
     }
     else if (largura <= 0 && contador == 1) {
@@ -97,56 +97,72 @@ var quiz = setInterval(function diminuir() {
         respostaB.innerHTML = "41"
         respostaD.innerHTML = "38"
     }
-    else if(largura<=0 && contador == 10) {
+    else if (largura <= 0 && contador == 10) {
         respostaA.innerHTML = ""
         respostaC.innerHTML = ""
         respostaB.innerHTML = ""
         respostaD.innerHTML = ""
-        ab.innerHTML = ""
-        ab.innerHTML = ""
-        cd.innerHTML = ""
-        cd.innerHTML = ""
-        if (acertos <= 4) {
+        ab.innerHTML = ''
+        cd.innerHTML = ''
+        if (qtacertos <= 4) {
             numeroquestao.innerHTML = "Que pena, poderia ter ido melhor"
         }
-        else if (acertos <= 7) {
+        else if (qtacertos <= 7) {
             numeroquestao.innerHTML = "Seu desempenho foi mediano"
         }
 
-        else if (acertos <= 9) {
+        else if (qtacertos <= 9) {
             numeroquestao.innerHTML = "Parabéns, você foi bem"
         }
 
         else {
             numeroquestao.innerHTML = "Uau, você é o(a) fã N°1 da Maroon 5"
         }
-        questao.innerHTML = `<p>Acertou: ${acertos} questões</p>`
-        clearInterval(quiz)
+        questao.innerHTML = `<p>Acertou: ${qtacertos} questões</p>`
+        clearInterval(quiz);
+        registraracertos();
+        aparecerdiv()
     }
 
 }, 3);
 
-function alternativaA(){
-    if(contador==5|| contador == 10){
-        acertos++
+
+function alternativaA() {
+    if (contador == 5 || contador == 10) {
+        qtacertos++
     }
-    largura=0
+    largura = 0
 }
-function alternativaB(){
-    if(contador==4|| contador == 7){
-        acertos++
+function alternativaB() {
+    if (contador == 4 || contador == 7) {
+        qtacertos++
     }
-    largura=0
+    largura = 0
 }
-function alternativaD(){
-    if(contador<=1 || contador == 3|| contador == 8){
-        acertos++
+function alternativaD() {
+    if (contador <= 1 || contador == 3 || contador == 8) {
+        qtacertos++
     }
-    largura=0
+    largura = 0
 }
-function alternativaC(){
-    if(contador==2||contador==6|| contador == 9){
-        acertos++
+function alternativaC() {
+    if (contador == 2 || contador == 6 || contador == 9) {
+        qtacertos++
     }
-    largura=0
+    largura = 0
+}
+function registraracertos() {
+
+    var qtdAcertos = qtacertos
+    // Enviando o valor da nova input
+    fetch("/usuarios/cadastrar", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            acertosServer: qtdAcertos,
+
+        })
+    })
 }
