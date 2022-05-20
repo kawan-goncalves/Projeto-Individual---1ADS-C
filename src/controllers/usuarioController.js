@@ -1,7 +1,7 @@
 var usuarioModel = require("../models/usuarioModel");
 
 var sessoes = [];
-function cadastrar(req, res) {
+function registraracertos(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
     var acertos = req.body.acertosServer;
 
@@ -29,7 +29,6 @@ function cadastrar(req, res) {
             );
     }
 }
-
 module.exports = {
     registraracertos
-}
+};
