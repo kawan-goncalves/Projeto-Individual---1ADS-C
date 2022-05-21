@@ -8,7 +8,7 @@ function registraracertos(acertos) {
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
     var instrucao = `
-        INSERT INTO Jogadas (qtdAcertos) VALUES ('${acertos}');
+        INSERT INTO Jogadas (qtdAcertos,fk_usuario) VALUES ('${acertos}','1');
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);

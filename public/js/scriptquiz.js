@@ -11,6 +11,7 @@ var perguntas = {
     resposta4: ["Payphone","The Voice","4","Songs About Jane","Red Pill Blue","Gravação do ano","Kara's Flower","2007","38"]
 
 }
+
 var quiz = setInterval(function diminuir() {
     tempopassando.style.width = largura + "px"
     largura -= 0.0440412
@@ -133,7 +134,11 @@ var quiz = setInterval(function diminuir() {
         questao.innerHTML = `<p>Acertou: ${qtacertos} questões</p>`
         clearInterval(quiz);
         registraracertos();
-        aparecerdiv();
+        setTimeout(()=>{
+        aparecerdiv()
+        obterDadosGrafico(1)
+        },50)
+        
     }
 
 }, 3);

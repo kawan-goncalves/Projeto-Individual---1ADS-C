@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="css/stylequiz.css">
     <link rel="stylesheet" href="css/style.css">
     <script src="js/scriptquiz.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+    <script type="text/javascript" src="https://www.chartjs.org/dist/2.8.0/Chart.min.js"></script>
 </head>
 
 <body>
@@ -72,74 +73,6 @@
 </html>
 <script>
 
-    const labels = [
-        '1',
-        '2',
-        '3',
-        '4',
-        '5',
-        '6',
-    ];
-    const labels2 = [
-        '0 Acertos',
-        '1 Acerto',
-        '2 Acertos',
-        '3 Acertos',
-        '4 Acertos',
-        '5 Acertos',
-        '6 Acertos',
-        '7 Acertos',
-        '8 Acertos',
-        '9 Acertos',
-        '10 Acertos'
-    ];
-
-    const data = {
-        labels: labels,
-        datasets: [
-            {
-                label: 'Histórico de jogadas',
-                backgroundColor: 'rgb(54, 162, 235)',
-                borderColor: 'rgb(54, 162, 235)',
-                data: [5, 3, 2, 2, 2, 10]
-            }
-        ]
-    };
-
-    const data2 = {
-        labels: labels2,
-        datasets: [{
-            label: 'Quantidade de Acertos dos Jogadores',
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
-            data: [1, 1, 2, 5, 3, 5, 8, 10, 4, 3, 1],
-        }
-        ]
-    };
-
-    const config = {
-        type: 'line',
-        data: data,
-        options: {}
-    };
-
-
-    const config2 = {
-        type: 'bar',
-        data: data2,
-        options: {}
-    };
-
-    const myChart = new Chart(
-        document.getElementById('myChart'),
-        config2
-    );
-
-    const myChart2 = new Chart(
-        document.getElementById('myChart2'),
-        config
-    );
-
     function aparecerdiv() {
         document.getElementById("linechart").style.display = 'block';
         document.getElementById("barchart").style.display = 'block';
@@ -149,6 +82,233 @@
         document.getElementById("myChart2").style.height = "200px"
     }
 
+    let proximaAtualizacao;
 
 
+
+
+
+
+
+    // O gráfico é construído com três funções:
+    // 1. obterDadosGrafico -> Traz dados do Banco de Dados para montar o gráfico da primeira vez
+    // 2. plotarGrafico -> Monta o gráfico com os dados trazidos e exibe em tela
+    // 3. atualizarGrafico -> Atualiza o gráfico, trazendo novamente dados do Banco
+
+    // Esta função *obterDadosGrafico* busca os últimos dados inseridos em tabela de medidas.
+    // para, quando carregar o gráfico da primeira vez, já trazer com vários dados.
+    // A função *obterDadosGrafico* também invoca a função *plotarGrafico*
+
+    //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
+    //     Para ajustar o "select", ajuste o comando sql em src/models
+    function obterDadosGrafico(idAquario) {
+
+
+        if (proximaAtualizacao != undefined) {
+            clearTimeout(proximaAtualizacao);
+        }
+
+        fetch(`/medidas/ultimas/${idAquario}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    resposta.reverse();
+
+                    plotarGrafico(resposta, idAquario);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
+
+
+
+            fetch(`/medidas/ultimasbarra/${idAquario}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    resposta.reverse();
+
+                    plotarGrafico(resposta, idAquario);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+    // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
+    // Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
+    // A função *plotarGrafico* também invoca a função *atualizarGrafico*
+    function plotarGrafico(resposta, idAquario) {
+        console.log('iniciando plotagem do gráfico...');
+
+        var dados = {
+            labels: [],
+            datasets: [
+                {
+                    label: 'Acertos',
+                    borderColor: '#32B9CD',
+                    backgroundColor: '#32b9cd8f',
+                    fill: true,
+                    data: []
+                }
+            ]
+        };
+        var dadosbarra = {
+            labels: [
+        
+            ],
+
+
+
+            datasets: [{
+                label: 'Quantidade de Jogadores',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: []
+            }]
+            
+
+
+        };
+
+        for (i = 0; i < resposta.length; i++) {
+            var registro = resposta[i];
+            var quest = Number(registro.numeroquest)-1
+            dados.labels.push(registro.momento_grafico);
+            dados.datasets[0].data.push(registro.Acertos);
+
+            dadosbarra.labels.push(`Acertos: ${registro.numeroquest}`);
+            dadosbarra.datasets[0].data.push(registro.qtdAcertosPorQuestao)
+        }
+
+        console.log(JSON.stringify(dados));
+        console.log(JSON.stringify(dadosbarra));
+
+        window.myChart2 = Chart.Bar(myChart2, {
+            data: dadosbarra,
+            options: {
+                responsive: true,
+                animation: { duration: 500 },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            min: 0
+                        }
+                    },
+
+
+                    ],
+                }
+            }
+        });
+
+        var ctx = myChart.getContext('2d');
+        window.myChart = Chart.Line(ctx, {
+            data: dados,
+            options: {
+                responsive: true,
+                animation: { duration: 500 },
+                hoverMode: 'index',
+                stacked: false,
+                title: {
+                    display: false,
+                    text: 'Dados capturados'
+                },
+                scales: {
+                    yAxes: [{
+                        type: 'linear',
+                        display: true,
+                        position: 'left',
+                        id: 'y-temperatura',
+                        ticks: {
+                            beginAtZero: true,
+                            max: 10,
+                            min: 0
+                        }
+                    },
+
+
+                    ],
+                }
+            }
+        });
+
+    }
+
+
+    // Esta função *atualizarGrafico* atualiza o gráfico que foi renderizado na página,
+    // buscando a última medida inserida em tabela contendo as capturas, 
+
+    //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
+    //     Para ajustar o "select", ajuste o comando sql em src/models
+    function atualizarGrafico(idAquario, dados) {
+
+        fetch(`/medidas/tempo-real/${idAquario}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (novoRegistro) {
+
+                    console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+                    console.log(`Dados atuais do gráfico: ${dados}`);
+
+                    // tirando e colocando valores no gráfico
+                    dados.labels.shift(); // apagar o primeiro
+                    dados.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
+
+
+                
+
+                    window.myChart2.update();
+
+                    // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+                // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
+            fetch(`/medidas/tempo-realbarra/${idAquario}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (novoRegistro) {
+
+                    console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+                    console.log(`Dados atuais do gráfico: ${dados}`);
+
+                    // tirando e colocando valores no gráfico
+                     // incluir um novo momento
+
+
+
+
+                    window.myChart2.update();
+
+                    // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+                // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+                proximaAtualizacao = setTimeout(()=> atualizarGrafico(idAquario, dados),2000)
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
+    }
 </script>
