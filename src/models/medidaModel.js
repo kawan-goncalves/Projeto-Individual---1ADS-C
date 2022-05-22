@@ -1,6 +1,6 @@
 var database = require("../database/config");
 
-function buscarUltimasMedidas(idAquario, limite_linhas) {
+function buscarUltimasMedidas(idUsuario, limite_linhas) {
 
     instrucaoSql = ''
 
@@ -11,14 +11,14 @@ function buscarUltimasMedidas(idAquario, limite_linhas) {
                         momento,
                         CONVERT(varchar, momento, 108) as momento_grafico
                     from medida
-                    where fk_aquario = ${idAquario}
+                    where fk_aquario = ${idUsuario}
                     order by id desc`;}*/
      if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `select 
         qtdAcertos as Acertos,
                         DATE_FORMAT(data_jogada,'%d/%m %H:%i') as momento_grafico
                     from Jogadas
-                    where fk_usuario = ${idAquario}
+                    where fk_usuario = ${idUsuario}
                     order by idJogada desc limit ${limite_linhas}`;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
@@ -29,7 +29,7 @@ function buscarUltimasMedidas(idAquario, limite_linhas) {
     return database.executar(instrucaoSql);
 }
 
-function buscarMedidasEmTempoReal(idAquario) {
+function buscarMedidasEmTempoReal(idUsuario) {
 
     instrucaoSql = ''
 
@@ -39,7 +39,7 @@ function buscarMedidasEmTempoReal(idAquario) {
         dht11_umidade as umidade,  
                         CONVERT(varchar, momento, 108) as momento_grafico, 
                         fk_aquario 
-                        from medida where fk_aquario = ${idAquario} 
+                        from medida where fk_aquario = ${idUsuario} 
                     order by id desc`;
 
     } */ if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
@@ -47,7 +47,7 @@ function buscarMedidasEmTempoReal(idAquario) {
         qtdAcertos as Acertos,
                         DATE_FORMAT(data_jogada,'%M:%D) as momento_grafico, 
                         fk_usuario 
-                        from Jogadas where fk_usuario = ${idAquario} 
+                        from Jogadas where fk_usuario = ${idUsuario} 
                     order by idJogada desc limit 1`;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
@@ -58,7 +58,7 @@ function buscarMedidasEmTempoReal(idAquario) {
     return database.executar(instrucaoSql);
 }
 
-function buscarUltimasMedidasbarra(idAquario) {
+function buscarUltimasMedidasbarra(idUsuario) {
 
     instrucaoSql = ''
 
@@ -69,7 +69,7 @@ function buscarUltimasMedidasbarra(idAquario) {
                         momento,
                         CONVERT(varchar, momento, 108) as momento_grafico
                     from medida
-                    where fk_aquario = ${idAquario}
+                    where fk_aquario = ${idUsuario}
                     order by id desc`;}*/
      if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `select qtdAcertos as numeroquest,count(qtdAcertos) as qtdAcertosPorQuestao
@@ -84,7 +84,7 @@ function buscarUltimasMedidasbarra(idAquario) {
     return database.executar(instrucaoSql);
 }
 
-function buscarMedidasEmTempoRealbarra(idAquario) {
+function buscarMedidasEmTempoRealbarra(idUsuario) {
 
     instrucaoSql = ''
 
@@ -94,7 +94,7 @@ function buscarMedidasEmTempoRealbarra(idAquario) {
         dht11_umidade as umidade,  
                         CONVERT(varchar, momento, 108) as momento_grafico, 
                         fk_aquario 
-                        from medida where fk_aquario = ${idAquario} 
+                        from medida where fk_aquario = ${idUsuario} 
                     order by id desc`;
 
     } */ if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {

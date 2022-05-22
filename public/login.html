@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro | Maroon 5</title>
+    <link rel="stylesheet" href="css/stylequiz.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/stylecadastro.css">
+    <script src="js/validacoes.js"></script>
+    <script src="js/masks.js"></script>
+</head>
+
+<body>
+    <div class="header">
+        <div class="container">
+            <a href="index.html"><img
+                    src="https://upload.wikimedia.org/wikipedia/commons/9/99/Maroon_5_%28Logo%29.png"></a>
+            <ul class="navbar">
+                <div class="menu-drop">
+                    <img src="img site/icon menu.png" name="drop" id="drop">
+                    <div class="drop-content">
+                        <a href="index.html">Home</a>
+                        <a href="inicioquiz.html">Quiz</a>
+                        <a href="login.html">Login</a>
+                        <a href="entrar.html">Cadastro</a>
+                    </div>
+                </div>
+            </ul>
+
+        </div>
+    </div>
+
+    
+    <div class="cardcadastro">
+        <div class="container">
+            <h2 class="tit">Entre</h2>
+        <h2 class="sub">Entre na sua conta e ter acesso a todo o site</h2>
+        <form id="formularioPrincipal" action="">
+
+            <div class="boxcadastro">
+            <label for="inputEmail">Email:</label>
+            <input required id="inputEmail">
+            <span id="avisoInputMail"></span>
+            </div>
+
+            <div class="boxcadastro">
+            <label for="inputSenha">Senha:</label>
+            <input required id="inputSenha" type="password">
+            <span id="avisoInputSenha"></span>
+            </div>
+
+            <button type="button" onclick="entrar()"> Cadastrar </button>
+        </form>
+        </div>
+    </div>
+    <div class="imagemcadastro">
+        <img src="img site/clipart4502012.png" alt="">
+    </div>
+</body>
+
+</html>
+<script>
+    var idUsuario = ""
+    function entrar() {
+        //aguardar();
+
+        var emailVar = inputEmail.value;
+        var senhaVar = inputSenha.value;
+
+        // TODO: VERIFICAR AS VALIDAÇÕES QUE ELES ESTÃO APRENDENDO EM ALGORITMOS 
+        if (emailVar == "" || senhaVar == "") {
+            card.style.marginTop = "15px"
+            $("div.warning").fadeIn(300).delay(1500).fadeOut(400);
+
+            setTimeout(function() {
+                card.style.marginTop = "87px";
+            }, 2200);
+
+            finalizarAguardar();
+            return false;
+        }
+        if (emailVar.indexOf("@") == -1 || emailVar.indexOf(".") == -1) {
+            card.style.marginTop = "15px"
+            $("div.warning").fadeIn(300).delay(1500).fadeOut(400);
+
+            setTimeout(function() {
+                card.style.marginTop = "87px";
+            }, 2200);
+
+            finalizarAguardar();
+            return false;
+
+
+        }
+
+        console.log("FORM LOGIN: ", emailVar);
+        console.log("FORM SENHA: ", senhaVar);
+
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            })
+        }).then(function(resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+
+                    sessionStorage.EMAIL_USUARIO = json.Email;
+                    sessionStorage.NOME_USUARIO = json.Nome;
+                    sessionStorage.ID_USUARIO = json.Id;
+
+                    
+
+                    setTimeout(function() {
+                        window.location = "./inicioquiz.html";
+                    }, 2000); // apenas para exibir o loading
+
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    finalizarAguardar(texto);
+                });
+                card.style.marginTop = "15px"
+                $("div.failure").fadeIn(300).delay(1500).fadeOut(400);
+                setTimeout(function() {
+                    card.style.marginTop = "87px";
+                }, 2216.5);
+            }
+
+        }).catch(function(erro) {
+            console.log(erro);
+        })
+
+        return false;
+         idUsuario = sessionStorage.ID_USUARIO
+    }
+
+
+</script>

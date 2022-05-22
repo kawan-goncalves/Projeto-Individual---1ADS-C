@@ -25,4 +25,4 @@ select qtdAcertos as numeroquest,count(qtdAcertos) as qtdAcertosPorQuestao
                     from Jogadas
                     group by qtdAcertos order by sum(distinctrow qtdAcertos) desc;
 
-insert into Jogadas (qtdAcertos, fk_usuario) values('7',2);
+insert into Jogadas (qtdAcertos, fk_usuario) values('5',2);

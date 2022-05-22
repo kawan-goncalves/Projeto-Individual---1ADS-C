@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro | Maroon 5</title>
+    <link rel="stylesheet" href="css/stylequiz.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/stylecadastro.css">
+    <script src="js/validacoes.js"></script>
+    <script src="js/masks.js"></script>
+</head>
+
+<body>
+    <div class="header">
+        <div class="container">
+            <a href="index.html"><img
+                    src="https://upload.wikimedia.org/wikipedia/commons/9/99/Maroon_5_%28Logo%29.png"></a>
+            <ul class="navbar">
+                <div class="menu-drop">
+                    <img src="img site/icon menu.png" name="drop" id="drop">
+                    <div class="drop-content">
+                        <a href="index.html">Home</a>
+                        <a href="inicioquiz.html">Quiz</a>
+                        <a href="login.html">Login</a>
+                        <a href="entrar.html">Cadastro</a>
+                    </div>
+                </div>
+            </ul>
+
+        </div>
+    </div>
+
+    
+    <div class="cardcadastro">
+        <div class="container">
+            <h2 class="tit">Cadastre-se</h2>
+        <h2 class="sub">Preencha os dados abaixo para criar uma conta e ter acesso a todo o site</h2>
+        <form id="formularioPrincipal" action="">
+            <div class="boxcadastro">
+            <label for="inputNome">Nome:</label>
+            <input  required id="inputNome">
+            </div>
+
+            <div class="boxcadastro">
+            <label for="inputEmail">Email:</label>
+            <input required id="inputEmail" onkeyup="verificarEmail()">
+            <span id="avisoInputMail"></span>
+            </div>
+
+            <div class="boxcadastro">
+            <label for="inputdtNascimento">Data de Nascimento:</label>
+            <input required id="inputdtNascimento" type="text" onkeyup="mascaranascimento()">
+            <span id="avisoInputdtNascimento"></span>
+            </div>
+
+            <div class="boxcadastro">
+            <label for="inputSenha">Senha:</label>
+            <input required id="inputSenha" type="password" onkeyup="ValidaSenha()">
+            <span id="avisoInputSenha"></span>
+            </div>
+
+            <div class="boxcadastro">
+            <label for="inputConfirmarSenha">Confirmar Senha:</label>
+            <input required id="inputConfirmarSenha" type="password" onkeyup="ValidaConfirmarSenha()">
+            <span id="avisoInputConfirmarSenha"></span>
+            </div>
+
+            <button type="button" onclick="cadastrar()"> Cadastrar </button>
+        </form>
+        </div>
+    </div>
+    <div class="imagemcadastro">
+        <img src="img site/clipart4502012.png" alt="">
+    </div>
+</body>
+
+</html>
+<script>
+    
+
+    function cadastrar() {
+        //aguardar();
+
+        //Recupere o valor da nova input pelo nome do id
+        // Agora vá para o método fetch logo abaixo
+
+        var nomeVar = inputNome.value;
+        var emailVar = inputEmail.value;
+        var nascimentoVar = palavrafinal;
+        var senhaVar = inputSenha.value;
+        var confirmacaoSenhaVar = inputConfirmarSenha.value;
+
+        if (nomeVar == "" || emailVar == "" || nascimentoVar == "" || senhaVar == "" || confirmacaoSenhaVar == "") {
+            //cardErro.style.display = "block"
+            //mensagem_erro.innerHTML = "Preencha todos os campos para prosseguir!";
+
+            finalizarAguardar();
+            return false;
+        }
+
+
+        if (emailVar.indexOf("@") == -1 || emailVar.indexOf(".") == -1) {
+            //  cardErro.style.display = "block"
+            // mensagem_erro.innerHTML = "Ops, e-mail inválido! Verifique e tente novamente.";
+            finalizarAguardar();
+            return false;
+        }
+
+        if (senhaVar != confirmacaoSenhaVar) {
+            // cardErro.style.display = "block"
+            //mensagem_erro.innerHTML = "As senhas inseridas devem ser iguais para prosseguir!";
+            finalizarAguardar();
+            return false;
+        } else {
+            // setInterval(sumirMensagem, 5000)
+        }
+
+        // Enviando o valor da nova input
+        fetch("/usuarios/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                nomeServer: nomeVar,
+                emailServer: emailVar,
+                nascimentoServer: nascimentoVar,
+                senhaServer: senhaVar,
+
+            })
+        }).then(function(resposta) {
+
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+                // cardErro.style.display = "block"
+                //  mensagem_erro.innerHTML = "Cadastro realizado com sucesso!";
+                window.location = "login.html";
+                limparFormulario();
+                finalizarAguardar();
+            } else {
+                throw ("Houve um erro ao tentar realizar o cadastro!");
+            }
+        }).catch(function(resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            //   finalizarAguardar();
+        });
+
+        return false;
+    }
+</script>
