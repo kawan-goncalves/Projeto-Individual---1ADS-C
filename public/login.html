@@ -63,7 +63,7 @@
 
 </html>
 <script>
-    var idUsuario = ""
+    
     function entrar() {
         //aguardar();
 
@@ -106,7 +106,7 @@
             },
             body: JSON.stringify({
                 emailServer: emailVar,
-                senhaServer: senhaVar
+                senhaServer: senhaVar,
             })
         }).then(function(resposta) {
             console.log("ESTOU NO THEN DO entrar()!")
@@ -118,9 +118,9 @@
                     console.log(json);
                     console.log(JSON.stringify(json));
 
-                    sessionStorage.EMAIL_USUARIO = json.Email;
-                    sessionStorage.NOME_USUARIO = json.Nome;
-                    sessionStorage.ID_USUARIO = json.Id;
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.idUsuario;
 
                     
 

@@ -84,9 +84,24 @@
 
     let proximaAtualizacao;
 
+    function registraracertos(idUsuario) {
+    var qtdAcertos = qtacertos
+    // Enviando o valor da nova input
+    fetch("/usuarios/registraracertos", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            acertosServer: qtdAcertos,
+            idServer: idUsuario
+
+        })
+    })
+}
 
 
-
+    var idUsuario = sessionStorage.ID_USUARIO;
 
 
 
@@ -101,20 +116,20 @@
 
     //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
     //     Para ajustar o "select", ajuste o comando sql em src/models
-    function obterDadosGrafico(idAquario) {
+    function obterDadosGrafico(idUsuario) {
 
 
         if (proximaAtualizacao != undefined) {
             clearTimeout(proximaAtualizacao);
         }
 
-        fetch(`/medidas/ultimas/${idAquario}`, { cache: 'no-store' }).then(function (response) {
+        fetch(`/medidas/ultimas/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (resposta) {
                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                     resposta.reverse();
 
-                    plotarGrafico(resposta, idAquario);
+                    plotarGrafico(resposta, idUsuario);
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
@@ -127,13 +142,13 @@
 
 
 
-            fetch(`/medidas/ultimasbarra/${idAquario}`, { cache: 'no-store' }).then(function (response) {
+            fetch(`/medidas/ultimasbarra/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (resposta) {
                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                     resposta.reverse();
 
-                    plotarGrafico(resposta, idAquario);
+                    plotarGrafico(resposta, idUsuario);
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
@@ -147,7 +162,7 @@
     // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
     // Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
     // A função *plotarGrafico* também invoca a função *atualizarGrafico*
-    function plotarGrafico(resposta, idAquario) {
+    function plotarGrafico(resposta, idUsuario) {
         console.log('iniciando plotagem do gráfico...');
 
         var dados = {
@@ -229,7 +244,7 @@
                         type: 'linear',
                         display: true,
                         position: 'left',
-                        id: 'y-temperatura',
+                        id: 'y-acertos',
                         ticks: {
                             beginAtZero: true,
                             max: 10,
@@ -251,9 +266,9 @@
 
     //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
     //     Para ajustar o "select", ajuste o comando sql em src/models
-    function atualizarGrafico(idAquario, dados) {
+    function atualizarGrafico(idUsuario, dados) {
 
-        fetch(`/medidas/tempo-real/${idAquario}`, { cache: 'no-store' }).then(function (response) {
+        fetch(`/medidas/tempo-real/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (novoRegistro) {
 
@@ -282,7 +297,7 @@
                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
 
-            fetch(`/medidas/tempo-realbarra/${idAquario}`, { cache: 'no-store' }).then(function (response) {
+            fetch(`/medidas/tempo-realbarra/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (novoRegistro) {
 
@@ -303,7 +318,7 @@
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
                 // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-                proximaAtualizacao = setTimeout(()=> atualizarGrafico(idAquario, dados),2000)
+                proximaAtualizacao = setTimeout(()=> atualizarGrafico(idUsuario, dados),2000)
             }
         })
             .catch(function (error) {

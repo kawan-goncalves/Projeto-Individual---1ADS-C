@@ -21,6 +21,8 @@ function buscarUltimasMedidas(req, res) {
 
 function buscarUltimasMedidasbarra(req, res) {
 
+    var idUsuario = req.params.idUsuario;
+
     console.log(`Recuperando todas as ultimas medidas`);
 
     medidaModel.buscarUltimasMedidasbarra(idUsuario).then(function (resultado) {

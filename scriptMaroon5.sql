@@ -16,6 +16,7 @@ fk_usuario int,
 foreign key (fk_usuario) references usuario(idUsuario));
 
 select*from Jogadas;
+select*from Usuario;
 
 insert into usuario values (null,'Kawan','2004-02-27','kawan@gmail.com','12345678');
 

@@ -3,16 +3,18 @@ var usuarioModel = require("../models/usuarioModel");
 var sessoes = [];
 function registraracertos(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
+    var idUsuario = req.body.idServer;
     var acertos = req.body.acertosServer;
-
     // Faça as validações dos valores
     if (acertos == undefined) {
         res.status(400).send("Seu acerto está undefined!");
     
-    } else {
+    }
+
+    else {
         
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.registraracertos(acertos)
+        usuarioModel.registraracertos(idUsuario,acertos)
             .then(
                 function (resultado) {
                     res.json(resultado);

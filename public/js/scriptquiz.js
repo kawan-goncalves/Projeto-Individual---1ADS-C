@@ -133,7 +133,7 @@ var quiz = setInterval(function diminuir() {
         }
         questao.innerHTML = `<p>Acertou: ${qtacertos} questões</p>`
         clearInterval(quiz);
-        registraracertos();
+        registraracertos(idUsuario);
         setTimeout(()=>{
         aparecerdiv()
         obterDadosGrafico(idUsuario)
@@ -178,6 +178,7 @@ function registraracertos() {
         },
         body: JSON.stringify({
             acertosServer: qtdAcertos,
+            idServer: idUsuario
 
         })
     })
