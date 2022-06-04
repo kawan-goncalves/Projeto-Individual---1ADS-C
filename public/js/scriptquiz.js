@@ -137,7 +137,7 @@ var quiz = setInterval(function diminuir() {
         setTimeout(()=>{
         aparecerdiv()
         obterDadosGrafico(idUsuario)
-        },50)
+        },500)
         
     }
 

@@ -6,6 +6,27 @@ body {
     margin: 0;
     background-color: #e2e2e2;
 }
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(11, 11, 11) transparent;
+  }
+  
+  /* Works on Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 15px;
+  }
+  
+  *::-webkit-scrollbar-track {
+    background: transparent
+
+  }
+  
+  *::-webkit-scrollbar-thumb {
+    background-color: rgb(0, 0, 0);
+    border-radius: 20px;
+    width: 15px;
+    border: 1.5px solid grey;
+  }
 
 .container {
     width: 90%;
@@ -188,54 +209,11 @@ body {
     display: block;
     font-weight: bold;
     font-size: 20px;
+    cursor: pointer;
   }
   .drop-content a:hover{
     background-color: #dbd9d9;
   }
   .menu-drop:hover .drop-content{
     display: block;
-  }
-
-  .modal {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background: rgba(0,0,0,0.8);
-    z-index: 3;
-    opacity:0;
-    transition: opacity 400ms ease-in;
-    pointer-events: none;
-  }
-  .modal:target {
-    opacity: 1;
-    pointer-events: auto;
-  }
-  .fechar {
-    position: absolute;
-    width: 30px;
-    right: -15px;
-    top: -20px;
-    text-align: center;
-    line-height: 30px;
-    margin-top: 5px;
-    background: #ff4545;
-    border-radius: 50%;
-    font-size: 16px;
-    color: #8d0000;
-  }
-  .modalCadastro{
-      background-color: #dbd9d9;
-      display: flex;
-      justify-content: center;
-      align-self: center;
-      justify-self: center;
-      align-items: center;
-      flex-direction: column;
-      height:300px;
-      width: 400px;
-      border-radius: 20px;
-      position: relative;
-      margin: 10% auto;
   }

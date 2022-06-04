@@ -1,6 +1,36 @@
 body{
     margin: 0;
     padding: 0;
+    background-color: #ffffff;
+}
+
+
+.fundocadastro {
+    position: relative;
+    padding-top: 30px;
+    padding-bottom: 80px;
+    background-color: rgb(99, 98, 98);
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.fundocadastro:before {
+    content: ' ';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0.6;
+    background-image: url('https://media.pitchfork.com/photos/60c8b64906280ce20ecfbef5/16:9/w_1280,c_limit/Maroon%205:%20Jordi.jpeg');
+    background-repeat: no-repeat;
+    background-position: 50% 0;
+    background-size: cover;
 }
 .cardcadastro{
     background-color: #000000;
@@ -10,6 +40,9 @@ body{
     flex-direction: column;
     align-items: center;
     float: left;
+    padding: 30px 0;
+    position: relative;
+    z-index: 2;
     
 }
 .cardcadastro form{
@@ -43,6 +76,7 @@ body{
     border: none;
     font: 500;
     font-size: 20px;
+    text-align: center;
 }
 
 .cardcadastro button {
@@ -56,14 +90,7 @@ body{
     border: none;
     cursor: pointer;
     margin-top: 10px;
-}
-.tit{
-    color: whitesmoke;
-    font-size: 30px;
-    background-image: linear-gradient(to right, yellow,rgb(235, 44, 235), rgb(47, 213, 255),green);
-    color: transparent;
-    background-clip: text;
-    -webkit-background-clip: text;
+    padding-bottom: 10px;
 }
 .sub{
     color: whitesmoke;
@@ -85,4 +112,30 @@ body{
     margin-top: -20px;
     width:55%;
     border-radius: 20px;
+}
+.opcoes{
+    display: flex;
+    flex-direction: row;
+    background-color: #000000;
+    z-index: 2;
+    width: 49.68%;
+}
+.opcoes button{
+    width: 50%;
+    height: 60px;
+    border-radius:0 ;
+    margin: 0;
+    border: 0;
+}
+#opcaocadastro{
+    color: #100f0f;
+    font-weight: bolder;
+    font-size: 30px;
+    cursor: pointer;
+}
+#opcaologin{
+    color: #100f0f;
+    font-weight: bolder;
+    font-size: 30px;
+    cursor: pointer;
 }

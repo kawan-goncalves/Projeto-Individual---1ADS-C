@@ -8,12 +8,13 @@
     <title>Quiz | Maroon 5</title>
     <link rel="stylesheet" href="css/stylequiz.css">
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/funcoes.js"></script>
     <script src="js/scriptquiz.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
     <script type="text/javascript" src="https://www.chartjs.org/dist/2.8.0/Chart.min.js"></script>
 </head>
 
-<body>
+<body onload="validarSessao()">
     <div class="header">
         <div class="container">
             <a href="index.html"><img
@@ -24,8 +25,7 @@
                     <div class="drop-content">
                         <a href="index.html">Home</a>
                         <a href="inicioquiz.html">Quiz</a>
-                        <a href="login.html">Login</a>
-                        <a href="entrar.html">Cadastro</a>
+                        <a onclick="limparSessao()" id="logout">Logout</a>
                     </div>
                 </div>
             </ul>

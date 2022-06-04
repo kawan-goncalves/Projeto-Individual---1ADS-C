@@ -11,9 +11,11 @@
     <link rel="stylesheet" href="css/stylecadastro.css">
     <script src="js/validacoes.js"></script>
     <script src="js/masks.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/funcoes.js"></script>
 </head>
 
-<body>
+<body onload="cadastrotela(), validarLogin()">
     <div class="header">
         <div class="container">
             <a href="index.html"><img
@@ -24,62 +26,88 @@
                     <div class="drop-content">
                         <a href="index.html">Home</a>
                         <a href="inicioquiz.html">Quiz</a>
-                        <a href="login.html">Login</a>
-                        <a href="entrar.html">Cadastro</a>
+                        <div id="loginmenu">
+                            <a href="entrar.html">Entrar</a>
+                        </div>
+                      <a onclick="limparSessao()" id="logout">Logout</a>
                     </div>
                 </div>
             </ul>
 
         </div>
     </div>
-
-    
+ <div class="fundocadastro">
+    <div class="opcoes">
+        <button id="opcaocadastro" onclick="cadastrotela()">Cadastrar</button>
+        <button id="opcaologin" onclick="entrartela()">Entrar</button>
+    </div>
     <div class="cardcadastro">
         <div class="container">
-            <h2 class="tit">Cadastre-se</h2>
-        <h2 class="sub">Preencha os dados abaixo para criar uma conta e ter acesso a todo o site</h2>
-        <form id="formularioPrincipal" action="">
-            <div class="boxcadastro">
-            <label for="inputNome">Nome:</label>
-            <input  required id="inputNome">
+            <div id="teladecadastro">
+                <h2 class="sub">Preencha os dados abaixo para criar uma conta e ter acesso a todo o site</h2>
+                <form id="formularioPrincipal" action="">
+                    <div class="boxcadastro">
+                        <label for="inputNome">Nome:</label>
+                        <input required id="inputNome">
+                    </div>
+
+                    <div class="boxcadastro">
+                        <label for="inputEmail">Email:</label>
+                        <input required id="inputEmail" onkeyup="verificarEmail()">
+                        <span id="avisoInputMail"></span>
+                    </div>
+
+                    <div class="boxcadastro">
+                        <label for="inputdtNascimento">Data de Nascimento:</label>
+                        <input required id="inputdtNascimento" type="text" onkeyup="mascaranascimento()">
+                        <span id="avisoInputdtNascimento"></span>
+                    </div>
+
+                    <div class="boxcadastro">
+                        <label for="inputSenha">Senha:</label>
+                        <input required id="inputSenha" type="password" onkeyup="ValidaSenha()">
+                        <span id="avisoInputSenha"></span>
+                    </div>
+
+                    <div class="boxcadastro">
+                        <label for="inputConfirmarSenha">Confirmar Senha:</label>
+                        <input required id="inputConfirmarSenha" type="password" onkeyup="ValidaConfirmarSenha()">
+                        <span id="avisoInputConfirmarSenha"></span>
+                    </div>
+
+                    <button type="button" onclick="cadastrar()"> Cadastrar </button>
+                </form>
             </div>
 
-            <div class="boxcadastro">
-            <label for="inputEmail">Email:</label>
-            <input required id="inputEmail" onkeyup="verificarEmail()">
-            <span id="avisoInputMail"></span>
-            </div>
+            <div id="teladelogin" class="card login" style="display: none">
 
-            <div class="boxcadastro">
-            <label for="inputdtNascimento">Data de Nascimento:</label>
-            <input required id="inputdtNascimento" type="text" onkeyup="mascaranascimento()">
-            <span id="avisoInputdtNascimento"></span>
-            </div>
+                <h2 class="sub">Entre na sua conta e ter acesso a todo o site</h2>
+                <form id="formularioPrincipal" action="">
 
-            <div class="boxcadastro">
-            <label for="inputSenha">Senha:</label>
-            <input required id="inputSenha" type="password" onkeyup="ValidaSenha()">
-            <span id="avisoInputSenha"></span>
-            </div>
+                    <div class="boxcadastro">
+                        <label for="inputEmaillogin">Email:</label>
+                        <input required id="inputEmaillogin">
+                        
+                    </div>
 
-            <div class="boxcadastro">
-            <label for="inputConfirmarSenha">Confirmar Senha:</label>
-            <input required id="inputConfirmarSenha" type="password" onkeyup="ValidaConfirmarSenha()">
-            <span id="avisoInputConfirmarSenha"></span>
-            </div>
+                    <div class="boxcadastro">
+                        <label for="inputSenhalogin">Senha:</label>
+                        <input required id="inputSenhalogin" type="password">
+                       
+                    </div>
 
-            <button type="button" onclick="cadastrar()"> Cadastrar </button>
-        </form>
+                    <button type="button" onclick="entrar()"> Entrar </button>
+                </form>
+            </div>
         </div>
     </div>
-    <div class="imagemcadastro">
-        <img src="img site/clipart4502012.png" alt="">
-    </div>
+</div>
+    
 </body>
 
 </html>
 <script>
-    
+
 
     function cadastrar() {
         //aguardar();
@@ -133,24 +161,113 @@
                 senhaServer: senhaVar,
 
             })
-        }).then(function(resposta) {
+        }).then(function (resposta) {
 
             console.log("resposta: ", resposta);
 
             if (resposta.ok) {
                 // cardErro.style.display = "block"
                 //  mensagem_erro.innerHTML = "Cadastro realizado com sucesso!";
-                window.location = "login.html";
+                opcaologin();
                 limparFormulario();
                 finalizarAguardar();
             } else {
                 throw ("Houve um erro ao tentar realizar o cadastro!");
             }
-        }).catch(function(resposta) {
+        }).catch(function (resposta) {
             console.log(`#ERRO: ${resposta}`);
             //   finalizarAguardar();
         });
 
         return false;
+    }
+
+    function entrar() {
+        //aguardar();
+
+        var emailVar = inputEmaillogin.value;
+        var senhaVar = inputSenhalogin.value;
+
+        // TODO: VERIFICAR AS VALIDAÇÕES QUE ELES ESTÃO APRENDENDO EM ALGORITMOS 
+        if (emailVar == "" || senhaVar == "") {
+            card.style.marginTop = "15px"
+            $("div.warning").fadeIn(300).delay(1500).fadeOut(400);
+
+            setTimeout(function() {
+                card.style.marginTop = "87px";
+            }, 2200);
+
+            finalizarAguardar();
+            return false;
+        }
+        if (emailVar.indexOf("@") == -1 || emailVar.indexOf(".") == -1) {
+            card.style.marginTop = "15px"
+            $("div.warning").fadeIn(300).delay(1500).fadeOut(400);
+
+            setTimeout(function() {
+                card.style.marginTop = "87px";
+            }, 2200);
+
+            finalizarAguardar();
+            return false;
+
+
+        }
+
+        console.log("FORM LOGIN: ", emailVar);
+        console.log("FORM SENHA: ", senhaVar);
+
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: emailVar,
+                senhaServer: senhaVar,
+            })
+        }).then(function(resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.idUsuario;
+
+                    
+
+                    setTimeout(function() {
+                        window.location = "./inicioquiz.html";
+                    }, 2000); // apenas para exibir o loading
+
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    finalizarAguardar(texto);
+                });
+                card.style.marginTop = "15px"
+                $("div.failure").fadeIn(300).delay(1500).fadeOut(400);
+                setTimeout(function() {
+                    card.style.marginTop = "87px";
+                }, 2216.5);
+            }
+
+        }).catch(function(erro) {
+            console.log(erro);
+        })
+
+        return false;
+         idUsuario = sessionStorage.ID_USUARIO
     }
 </script>
