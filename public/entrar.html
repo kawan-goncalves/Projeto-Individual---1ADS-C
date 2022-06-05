@@ -13,6 +13,7 @@
     <script src="js/masks.js"></script>
     <script src="js/script.js"></script>
     <script src="js/funcoes.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body onload="cadastrotela(), validarLogin()">
@@ -29,80 +30,82 @@
                         <div id="loginmenu">
                             <a href="entrar.html">Entrar</a>
                         </div>
-                      <a onclick="limparSessao()" id="logout">Logout</a>
+                        <a onclick="limparSessao()" id="logout">Logout</a>
                     </div>
                 </div>
             </ul>
 
         </div>
     </div>
- <div class="fundocadastro">
-    <div class="opcoes">
-        <button id="opcaocadastro" onclick="cadastrotela()">Cadastrar</button>
-        <button id="opcaologin" onclick="entrartela()">Entrar</button>
-    </div>
-    <div class="cardcadastro">
-        <div class="container">
-            <div id="teladecadastro">
-                <h2 class="sub">Preencha os dados abaixo para criar uma conta e ter acesso a todo o site</h2>
-                <form id="formularioPrincipal" action="">
-                    <div class="boxcadastro">
-                        <label for="inputNome">Nome:</label>
-                        <input required id="inputNome">
-                    </div>
+    <div class="fundocadastro">
+        <div class="opcoes">
+            <button id="opcaocadastro" onclick="cadastrotela()">Cadastrar</button>
+            <button id="opcaologin" onclick="entrartela()">Entrar</button>
+        </div>
+        <div class="cardcadastro">
+            <div class="container">
+                <div id="teladecadastro">
+                    <h2 class="sub">Preencha os dados abaixo para criar uma conta e ter acesso a todo o site</h2>
+                    <form id="formularioPrincipal" action="">
+                        <div class="boxcadastro">
+                            <label for="inputNome">Nome:</label>
+                            <input required id="inputNome">
+                        </div>
 
-                    <div class="boxcadastro">
-                        <label for="inputEmail">Email:</label>
-                        <input required id="inputEmail" onkeyup="verificarEmail()">
-                        <span id="avisoInputMail"></span>
-                    </div>
+                        <div class="boxcadastro">
+                            <label for="inputEmail">Email:</label>
+                            <input required id="inputEmail" onkeyup="verificarEmail()">
+                            <span id="avisoInputMail"></span>
+                        </div>
 
-                    <div class="boxcadastro">
-                        <label for="inputdtNascimento">Data de Nascimento:</label>
-                        <input required id="inputdtNascimento" type="text" onkeyup="mascaranascimento()">
-                        <span id="avisoInputdtNascimento"></span>
-                    </div>
+                        <div class="boxcadastro">
+                            <label for="inputdtNascimento">Data de Nascimento:</label>
+                            <input required id="inputdtNascimento" type="text" onkeyup="mascaranascimento()">
+                            <span id="avisoInputdtNascimento"></span>
+                        </div>
 
-                    <div class="boxcadastro">
-                        <label for="inputSenha">Senha:</label>
-                        <input required id="inputSenha" type="password" onkeyup="ValidaSenha()">
-                        <span id="avisoInputSenha"></span>
-                    </div>
+                        <div class="boxcadastro">
+                            <label for="inputSenha">Senha:</label>
+                            <input required id="inputSenha" type="password" onkeyup="ValidaSenha()">
+                            <span id="avisoInputSenha"></span>
+                        </div>
 
-                    <div class="boxcadastro">
-                        <label for="inputConfirmarSenha">Confirmar Senha:</label>
-                        <input required id="inputConfirmarSenha" type="password" onkeyup="ValidaConfirmarSenha()">
-                        <span id="avisoInputConfirmarSenha"></span>
-                    </div>
+                        <div class="boxcadastro">
+                            <label for="inputConfirmarSenha">Confirmar Senha:</label>
+                            <input required id="inputConfirmarSenha" type="password" onkeyup="ValidaConfirmarSenha()">
+                            <span id="avisoInputConfirmarSenha"></span>
+                        </div>
+                            <img src="https://i.gifer.com/2Cwq.gif" alt="" style="height:70px; display: none;" id="iconloading">
+                        <button type="button" onclick="cadastrar()"> Cadastrar </button>
+                    </form>
+                </div>
 
-                    <button type="button" onclick="cadastrar()"> Cadastrar </button>
-                </form>
-            </div>
+                <div id="teladelogin" class="card login" style="display: none">
 
-            <div id="teladelogin" class="card login" style="display: none">
+                    <h2 class="sub">Entre na sua conta e ter acesso a todo o site</h2>
+                    <form id="formularioPrincipal" action="">
 
-                <h2 class="sub">Entre na sua conta e ter acesso a todo o site</h2>
-                <form id="formularioPrincipal" action="">
+                        <div class="boxcadastro">
+                            <label for="inputEmaillogin">Email:</label>
+                            <input required id="inputEmaillogin">
 
-                    <div class="boxcadastro">
-                        <label for="inputEmaillogin">Email:</label>
-                        <input required id="inputEmaillogin">
+                        </div>
+
+                        <div class="boxcadastro">
+                            <label for="inputSenhalogin">Senha:</label>
+                            <input required id="inputSenhalogin" type="password">
+
+                        </div>
                         
-                    </div>
-
-                    <div class="boxcadastro">
-                        <label for="inputSenhalogin">Senha:</label>
-                        <input required id="inputSenhalogin" type="password">
-                       
-                    </div>
-
-                    <button type="button" onclick="entrar()"> Entrar </button>
-                </form>
+                            <img src="https://i.gifer.com/2Cwq.gif" alt=""  style="height:70px; display: none;" id="iconloading">
+                        
+                        <button type="button" onclick="entrar()"> Entrar </button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
-    
+
 </body>
 
 </html>
@@ -110,7 +113,7 @@
 
 
     function cadastrar() {
-        //aguardar();
+        aguardar();
 
         //Recupere o valor da nova input pelo nome do id
         // Agora vá para o método fetch logo abaixo
@@ -124,7 +127,14 @@
         if (nomeVar == "" || emailVar == "" || nascimentoVar == "" || senhaVar == "" || confirmacaoSenhaVar == "") {
             //cardErro.style.display = "block"
             //mensagem_erro.innerHTML = "Preencha todos os campos para prosseguir!";
-
+            Swal.fire({
+                position: 'top-center',
+                icon: 'warning',
+                title: 'Todos os campos devem ser preenchidos!',
+                timerProgressBar: true,
+                showConfirmButton: false,
+                timer: 1500,
+            })
             finalizarAguardar();
             return false;
         }
@@ -133,6 +143,14 @@
         if (emailVar.indexOf("@") == -1 || emailVar.indexOf(".") == -1) {
             //  cardErro.style.display = "block"
             // mensagem_erro.innerHTML = "Ops, e-mail inválido! Verifique e tente novamente.";
+            Swal.fire({
+                position: 'top-center',
+                icon: 'warning',
+                title: 'Ops, e-mail inválido! Verifique e tente novamente.',
+                timerProgressBar: true,
+                showConfirmButton: false,
+                timer: 1500,
+            })
             finalizarAguardar();
             return false;
         }
@@ -140,13 +158,19 @@
         if (senhaVar != confirmacaoSenhaVar) {
             // cardErro.style.display = "block"
             //mensagem_erro.innerHTML = "As senhas inseridas devem ser iguais para prosseguir!";
+            Swal.fire({
+                position: 'top-center',
+                icon: 'warning',
+                title: 'As senhas inseridas devem ser iguais',
+                timerProgressBar: true,
+                showConfirmButton: false,
+                timer: 1500,
+            })
             finalizarAguardar();
             return false;
         } else {
             // setInterval(sumirMensagem, 5000)
         }
-
-        // Enviando o valor da nova input
         fetch("/usuarios/cadastrar", {
             method: "POST",
             headers: {
@@ -159,54 +183,80 @@
                 emailServer: emailVar,
                 nascimentoServer: nascimentoVar,
                 senhaServer: senhaVar,
-
             })
         }).then(function (resposta) {
 
             console.log("resposta: ", resposta);
 
             if (resposta.ok) {
-                // cardErro.style.display = "block"
-                //  mensagem_erro.innerHTML = "Cadastro realizado com sucesso!";
-                opcaologin();
+                // cardErro.style.display = "block";
+
+                //  mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+                Swal.fire({
+                    position: 'top-center',
+                    icon: 'success',
+                    title: 'Cadastro realizado com sucesso!',
+                    timerProgressBar: true,
+                    showConfirmButton: false,
+                    timer: 1500,
+                })
+
+                setTimeout(() => {
+                    entrartela()
+                }, "2000")
+
                 limparFormulario();
                 finalizarAguardar();
             } else {
+                Swal.fire({
+                    position: 'top-center',
+                    icon: 'error',
+                    title: 'Houve um erro ao tentar realizar o cadastro!',
+                    timerProgressBar: true,
+                    showConfirmButton: false,
+                    timer: 1500,
+                })
                 throw ("Houve um erro ao tentar realizar o cadastro!");
             }
         }).catch(function (resposta) {
             console.log(`#ERRO: ${resposta}`);
-            //   finalizarAguardar();
+            finalizarAguardar();
         });
 
         return false;
     }
 
     function entrar() {
-        //aguardar();
+        aguardar();
 
         var emailVar = inputEmaillogin.value;
         var senhaVar = inputSenhalogin.value;
 
         // TODO: VERIFICAR AS VALIDAÇÕES QUE ELES ESTÃO APRENDENDO EM ALGORITMOS 
-        if (emailVar == "" || senhaVar == "") {
-            card.style.marginTop = "15px"
-            $("div.warning").fadeIn(300).delay(1500).fadeOut(400);
+        if (emailVar == '' || senhaVar == '') {
 
-            setTimeout(function() {
-                card.style.marginTop = "87px";
-            }, 2200);
+                Swal.fire({
+                    position: 'top-center',
+                    icon: 'warning',
+                    title: 'Preencha todos os campos para prosseguir!',
+                    timerProgressBar: true,
+                    showConfirmButton: false,
+                    timer: 1500,
+                })
 
-            finalizarAguardar();
-            return false;
+                finalizarAguardar();
+                return false;
         }
-        if (emailVar.indexOf("@") == -1 || emailVar.indexOf(".") == -1) {
-            card.style.marginTop = "15px"
-            $("div.warning").fadeIn(300).delay(1500).fadeOut(400);
+         if (emailVar.indexOf("@") == -1 || emailVar.indexOf(".") == -1) {
 
-            setTimeout(function() {
-                card.style.marginTop = "87px";
-            }, 2200);
+            Swal.fire({
+                position: 'top-center',
+                icon: 'warning',
+                title: 'Ops, e-mail inválido! Verifique e tente novamente.',
+                timerProgressBar: true,
+                showConfirmButton: false,
+                timer: 1500,
+            })
 
             finalizarAguardar();
             return false;
@@ -217,7 +267,7 @@
         console.log("FORM LOGIN: ", emailVar);
         console.log("FORM SENHA: ", senhaVar);
 
-        fetch("/usuarios/autenticar", {
+       fetch("/usuarios/autenticar", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -226,7 +276,7 @@
                 emailServer: emailVar,
                 senhaServer: senhaVar,
             })
-        }).then(function(resposta) {
+        }).then(function (resposta) {
             console.log("ESTOU NO THEN DO entrar()!")
 
             if (resposta.ok) {
@@ -240,9 +290,17 @@
                     sessionStorage.NOME_USUARIO = json.nome;
                     sessionStorage.ID_USUARIO = json.idUsuario;
 
-                    
+                    Swal.fire({
+                        position: 'top-center',
+                        icon: 'success',
+                        title: 'Login feito com Sucesso!!!',
+                        timerProgressBar: true,
+                        showConfirmButton: false,
+                        timer: 1500,
+                    })
 
-                    setTimeout(function() {
+
+                    setTimeout(function () {
                         window.location = "./inicioquiz.html";
                     }, 2000); // apenas para exibir o loading
 
@@ -256,18 +314,20 @@
                     console.error(texto);
                     finalizarAguardar(texto);
                 });
-                card.style.marginTop = "15px"
-                $("div.failure").fadeIn(300).delay(1500).fadeOut(400);
-                setTimeout(function() {
-                    card.style.marginTop = "87px";
-                }, 2216.5);
+                Swal.fire({
+                    position: 'top-center',
+                    icon: 'error',
+                    title: 'Esse email e senha não correspondem a nenhuma conta!!!',
+                    timerProgressBar: true,
+                    showConfirmButton: false,
+                    timer: 1500,
+                })
             }
 
-        }).catch(function(erro) {
+        }).catch(function (erro) {
             console.log(erro);
         })
 
         return false;
-         idUsuario = sessionStorage.ID_USUARIO
     }
 </script>
